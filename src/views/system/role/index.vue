@@ -303,12 +303,12 @@ const loadMenuOptions = async () => {
 
 // 系统内置权限列表
 const permissionOptions = [
-  { label: '用户管理', value: 'manage_users' },
-  { label: '角色管理', value: 'manage_roles' },
-  { label: '菜单管理', value: 'manage_menus' },
-  { label: '数据录入', value: 'data_input' },
-  { label: '信息录入', value: 'info_input' }
-]
+  { label: "用户管理", value: "manage_users" },
+  { label: "角色管理", value: "manage_roles" },
+  { label: "菜单管理", value: "manage_menus" },
+  { label: "数据录入", value: "data_input" },
+  { label: "信息录入", value: "info_input" },
+];
 
 // 显示新增弹窗
 const showCreateModal = () => {
@@ -476,7 +476,6 @@ onMounted(async () => {
   }
 });
 </script>
-
 <style scoped>
 /* 添加树形组件的样式 */
 :deep(.ant-tree) {

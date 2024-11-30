@@ -1,11 +1,13 @@
 <template>
-  <a-layout class="min-h-screen">
+  <a-layout class="main-layout">
     <app-header @logout="showLogoutModal" />
     <a-layout>
       <app-sider />
       <a-layout>
-        <a-layout-content class="p-6">
-          <router-view></router-view>
+        <a-layout-content class="main-content">
+          <div class="content-wrapper">
+            <router-view></router-view>
+          </div>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -57,11 +59,43 @@ const handleLogout = async () => {
 }
 </script>
 
-<style scoped>
-:deep(.ant-layout-content) {
-  background: #fff;
-  padding: 24px;
-  margin: 16px;
-  min-height: 280px;
+<style lang="less" scoped>
+.main-layout {
+  height: 100vh;
+  overflow: hidden;
+
+  .main-content {
+    height: calc(100vh - 64px);  // 减去头部高度
+    margin-top: 64px;  // 头部高度
+    padding: 24px;
+    overflow: hidden;  // 防止外层滚动
+    background: #f0f2f5;
+
+    .content-wrapper {
+      height: 100%;
+      overflow-y: auto;  // 内容区域可滚动
+      background: #fff;
+      border-radius: 2px;
+      padding: 24px;
+
+      // 美化滚动条
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+
+        &:hover {
+          background: rgba(0, 0, 0, 0.3);
+        }
+      }
+
+      &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
 }
 </style> 

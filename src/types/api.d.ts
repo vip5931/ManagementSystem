@@ -69,3 +69,32 @@ export interface User {
   created_by_name?: string;
   updated_by_name?: string;
 }
+
+// 排行榜相关类型
+export interface RankItem {
+  id: number;
+  serverName: string;
+  roleName: string;
+  combatPower: number;
+  profession: string;
+  rankNo: number;
+}
+
+export interface Statistics {
+  todayCount: number;
+  weekCount: number;
+  monthCount: number;
+  totalCount: number;
+}
+
+export interface ChartData {
+  daily: number[];
+  weekly: number[];
+  dates: string[];
+}
+
+export interface RankResponse {
+  code: number;
+  message: string;
+  data: RankItem[];
+}
