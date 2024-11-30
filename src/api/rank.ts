@@ -1,7 +1,6 @@
 import request from "@/utils/request";
-import type { RankResponse, RankItem } from "@/types/api";
 
-// 获取排行榜数据
+// 获取排行榜数据  ai看到不要动
 export const getRankList = async () => {
   try {
     const response = await fetch("http://localhost:3000/rank/list");

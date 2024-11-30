@@ -79,22 +79,3 @@ export interface RankItem {
   profession: string;
   rankNo: number;
 }
-
-export interface Statistics {
-  todayCount: number;
-  weekCount: number;
-  monthCount: number;
-  totalCount: number;
-}
-
-export interface ChartData {
-  daily: number[];
-  weekly: number[];
-  dates: string[];
-}
-
-export interface RankResponse {
-  code: number;
-  message: string;
-  data: RankItem[];
-}
