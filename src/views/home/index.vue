@@ -118,7 +118,7 @@ interface Statistics {
 }
 
 // 状态定义
-const activeTab = ref('server');
+const activeTab = ref("server");
 const loading = ref(false);
 const chartRef = ref<HTMLElement>();
 let chart: echarts.ECharts | null = null;
@@ -135,7 +135,7 @@ const statistics = ref<Statistics>({
 
 const rankList = ref({
   server: [] as RankItem[],
-  profession: [] as RankItem[]
+  profession: [] as RankItem[],
 });
 
 // 获取排名颜色
@@ -225,37 +225,37 @@ const initProfessionChart = () => {
   const option: EChartsOption = {
     tooltip: {
       trigger: "item",
-      formatter: "{b}: {c}人 ({d}%)"
+      formatter: "{b}: {c}人 ({d}%)",
     },
     legend: {
       orient: "horizontal",
       bottom: 0,
-      left: 'center',
+      left: "center",
       itemWidth: 25,
-      itemHeight: 14
+      itemHeight: 14,
     },
     series: [
       {
         type: "pie",
         radius: ["35%", "60%"],
-        center: ['50%', '45%'],
+        center: ["50%", "45%"],
         avoidLabelOverlap: true,
         itemStyle: {
           borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2
+          borderColor: "#fff",
+          borderWidth: 2,
         },
         label: {
           show: true,
-          position: 'outside',
-          formatter: '{b}: {c}人'
+          position: "outside",
+          formatter: "{b}: {c}人",
         },
         emphasis: {
           label: {
             show: true,
             fontSize: 14,
-            fontWeight: "bold"
-          }
+            fontWeight: "bold",
+          },
         },
         data: [
           {
@@ -313,9 +313,9 @@ const initProfessionChart = () => {
             name: "妙音",
             itemStyle: { color: professionColors["妙音"] },
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   };
 
   professionChart.setOption(option);
@@ -332,7 +332,7 @@ const initPowerChart = () => {
       axisPointer: {
         type: "shadow",
       },
-      formatter: '{b}: {c}人'
+      formatter: "{b}: {c}人",
     },
     grid: {
       left: "3%",
@@ -342,15 +342,22 @@ const initPowerChart = () => {
     },
     xAxis: {
       type: "category",
-      data: ["1000万以下", "1000-2000万", "2000-3000万", "3000-4000万", "4000-5000万", "5000万以上"],
+      data: [
+        "1000万以下",
+        "1000-2000万",
+        "2000-3000万",
+        "3000-4000万",
+        "4000-5000万",
+        "5000万以上",
+      ],
       axisLabel: {
         interval: 0,
-        rotate: 30
-      }
+        rotate: 30,
+      },
     },
     yAxis: {
       type: "value",
-      name: '人数'
+      name: "人数",
     },
     series: [
       {
@@ -358,19 +365,26 @@ const initPowerChart = () => {
         data: [0, 0, 0, 0, 0, 0],
         itemStyle: {
           borderRadius: [4, 4, 0, 0],
-          color: function(params: any) {
-            const colors = ['#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452'];
+          color: function (params: any) {
+            const colors = [
+              "#91cc75",
+              "#fac858",
+              "#ee6666",
+              "#73c0de",
+              "#3ba272",
+              "#fc8452",
+            ];
             return colors[params.dataIndex];
-          }
+          },
         },
         label: {
           show: true,
-          position: 'top',
-          formatter: '{c}人',
+          position: "top",
+          formatter: "{c}人",
           fontSize: 12,
-          color: '#666'
+          color: "#666",
         },
-        barWidth: '40%'  // 控制柱子宽度
+        barWidth: "40%", // 控制柱子宽度
       },
     ],
   };
@@ -387,56 +401,65 @@ const initTrendChart = () => {
     tooltip: {
       trigger: "axis",
       axisPointer: {
-        type: "shadow"
+        type: "shadow",
       },
       formatter: (params: any) => {
         const data = params[0];
         return `${data.name}<br/>
                 总战力: ${(data.value / 10000).toFixed(1)}万<br/>
                 角色数: ${data.count}人`;
-      }
+      },
     },
     grid: {
       left: "3%",
       right: "4%",
       bottom: "10%",
       top: "3%",
-      containLabel: true
+      containLabel: true,
     },
     xAxis: {
       type: "category",
       data: [],
       axisLabel: {
         interval: 0,
-        rotate: 30
-      }
+        rotate: 30,
+      },
     },
     yAxis: {
       type: "value",
       name: "总战力",
       axisLabel: {
         formatter: (value: number) => {
-          return (value / 10000).toFixed(0) + '万';
-        }
-      }
-    },
-    series: [{
-      type: 'bar',
-      barWidth: '40%',
-      label: {
-        show: true,
-        position: 'top',
-        formatter: (params: any) => {
-          return (params.value / 10000).toFixed(0) + '万';
-        }
+          return (value / 10000).toFixed(0) + "万";
+        },
       },
-      itemStyle: {
-        color: function(params: any) {
-          const colors = ['#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452'];
-          return colors[params.dataIndex % colors.length];
-        }
-      }
-    }]
+    },
+    series: [
+      {
+        type: "bar",
+        barWidth: "40%",
+        label: {
+          show: true,
+          position: "top",
+          formatter: (params: any) => {
+            return (params.value / 10000).toFixed(0) + "万";
+          },
+        },
+        itemStyle: {
+          color: function (params: any) {
+            const colors = [
+              "#91cc75",
+              "#fac858",
+              "#ee6666",
+              "#73c0de",
+              "#3ba272",
+              "#fc8452",
+            ];
+            return colors[params.dataIndex % colors.length];
+          },
+        },
+      },
+    ],
   };
 
   trendChart.setOption(option);
@@ -542,7 +565,7 @@ const fetchRankData = async () => {
       if (!acc[curr.serverName]) {
         acc[curr.serverName] = {
           total: 0,
-          count: 0
+          count: 0,
         };
       }
       acc[curr.serverName].total += curr.combatPower;
@@ -553,18 +576,20 @@ const fetchRankData = async () => {
     // 更新趋势图
     if (trendChart) {
       const servers = Object.keys(serverData);
-      const totals = servers.map(server => ({
+      const totals = servers.map((server) => ({
         value: serverData[server].total,
-        count: serverData[server].count
+        count: serverData[server].count,
       }));
 
       trendChart.setOption({
         xAxis: {
-          data: servers
+          data: servers,
         },
-        series: [{
-          data: totals.map(item => item.value)
-        }]
+        series: [
+          {
+            data: totals.map((item) => item.value),
+          },
+        ],
       });
     }
   } catch (error) {
