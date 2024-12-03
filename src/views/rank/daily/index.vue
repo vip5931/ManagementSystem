@@ -26,12 +26,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { TableColumnType } from 'ant-design-vue/es/table';
+import type { TableProps } from 'ant-design-vue/es/table';
 import { message } from 'ant-design-vue/es';
 import { getRankList } from '@/api/rank';
-import type { DataItem } from '@/types/api';
+import type { RankItem } from '@/types/api';
 
-const columns: TableColumnType[] = [
+const columns = [
   {
     title: "名称",
     dataIndex: "name",
@@ -57,10 +57,10 @@ const columns: TableColumnType[] = [
     key: "action",
     width: 200,
   },
-];
+] as TableProps['columns'];
 
 const loading = ref(false);
-const dataSource = ref<DataItem[]>([]);
+const dataSource = ref<RankItem[]>([]);
 const pagination = ref({
   total: 0,
   current: 1,

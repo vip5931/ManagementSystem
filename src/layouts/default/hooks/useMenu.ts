@@ -1,9 +1,17 @@
 import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
-import type { MenuProps } from "ant-design-vue/es/menu";
+import type { MenuProps } from "ant-design-vue";
 import { useUserStore } from "@/stores/user";
 import * as Icons from "@ant-design/icons-vue";
 import { h } from "vue";
+
+interface MenuItem {
+  id: number;
+  name: string;
+  icon?: string;
+  path: string;
+  children?: MenuItem[];
+}
 
 export function useMenu() {
   const router = useRouter();
@@ -13,8 +21,8 @@ export function useMenu() {
 
   // 转换菜单数据为 Ant Design Vue 菜单格式
   const menuItems = computed<MenuProps["items"]>(() => {
-    const convertMenus = (menus: typeof userStore.menus): MenuProps["items"] => {
-      return menus.map((menu) => ({
+    const convertMenus = (menus: MenuItem[]): MenuProps["items"] => {
+      return menus.map((menu: MenuItem) => ({
         key: menu.id.toString(),
         label: menu.name,
         icon: menu.icon ? h(Icons[menu.icon as keyof typeof Icons]) : undefined,
@@ -53,7 +61,7 @@ export function useMenu() {
   };
 
   // 处理菜单选择
-  const handleSelect: MenuProps["onSelect"] = ({ key }) => {
+  const handleSelect: MenuProps["onSelect"] = ({ key }: { key: string }) => {
     // 在菜单项中查找对应的路径
     const findPath = (items: typeof userStore.menus): string | null => {
       for (const item of items) {

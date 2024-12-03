@@ -1,37 +1,36 @@
 {
-  "name": "managementsystem",
+  "name": "management-system",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "@vueuse/core": "^10.9.0",
+    "@vueuse/core": "^12.0.0",
     "ant-design-vue": "^4.1.2",
-    "axios": "^1.6.7",
+    "axios": "^1.6.8",
     "dayjs": "^1.11.13",
     "echarts": "^5.5.1",
-    "pinia": "^2.1.7",
-    "vue": "^3.5.13",
+    "pinia": "^2.2.8",
+    "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
-    "@types/echarts": "^4.9.22",
-    "@types/node": "^20.11.24",
-    "@unocss/preset-attributify": "^0.58.5",
-    "@unocss/preset-uno": "^0.58.5",
+    "@types/echarts": "4.9.22",
+    "@types/node": "^20.17.9",
+    "@unocss/preset-attributify": "0.58.9",
+    "@unocss/preset-uno": "0.58.9",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/runtime-core": "^3.5.13",
-    "@vue/tsconfig": "^0.5.1",
+    "@vue/runtime-core": "3.5.13",
+    "@vue/tsconfig": "0.5.1",
     "less": "^4.2.0",
-    "typescript": "~5.6.2",
-    "unocss": "^0.58.5",
-    "vite": "^5.1.4",
-    "vue-tsc": "^2.1.10"
-  },
-  "packageManager": "pnpm@8.15.4"
+    "typescript": "^5.2.2",
+    "unocss": "^0.58.6",
+    "vite": "^5.1.6",
+    "vue-tsc": "2.1.10"
+  }
 }

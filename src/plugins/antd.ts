@@ -1,45 +1,48 @@
 import type { App } from 'vue'
-import {
-  Button,
-  Input,
-  Form,
-  Layout,
-  Menu,
-  Table,
-  Card,
-  Modal,
-  Dropdown,
-  Avatar,
-  Popconfirm,
+import * as antd from 'ant-design-vue'
+const {
+  Button: AButton,
+  Input: AInput,
+  Form: AForm,
+  Layout: ALayout,
+  Menu: AMenu,
+  Table: ATable,
+  Card: ACard,
+  Modal: AModal,
+  Dropdown: ADropdown,
+  Avatar: AAvatar,
+  Popconfirm: APopconfirm,
   message,
   notification,
-  TreeSelect,
-  Select,
-  InputNumber,
-  Tag,
-  Radio,
-  Tree
-} from 'ant-design-vue'
+  TreeSelect: ATreeSelect,
+  Select: ASelect,
+  InputNumber: AInputNumber,
+  Tag: ATag,
+  Radio: ARadio,
+  Tree: ATree,
+  Switch: ASwitch
+} = antd
 
 // 组件列表
 const components = [
-  Button,
-  Input,
-  Form,
-  Layout,
-  Menu,
-  Table,
-  Card,
-  Modal,
-  Dropdown,
-  Avatar,
-  Popconfirm,
-  TreeSelect,
-  Select,
-  InputNumber,
-  Tag,
-  Radio,
-  Tree
+  AButton,
+  AInput,
+  AForm,
+  ALayout,
+  AMenu,
+  ATable,
+  ACard,
+  AModal,
+  ADropdown,
+  AAvatar,
+  APopconfirm,
+  ATreeSelect,
+  ASelect,
+  AInputNumber,
+  ATag,
+  ARadio,
+  ATree,
+  ASwitch
 ]
 
 export function setupAntd(app: App<Element>) {

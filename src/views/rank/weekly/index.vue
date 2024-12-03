@@ -26,8 +26,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import type { TableColumnsType } from 'ant-design-vue';
-import { message } from 'ant-design-vue';
+import type { TableProps } from 'ant-design-vue/es/table';
+import { message } from 'ant-design-vue/es';
 import { getRankList } from '@/api/rank';
 
 interface DataItem {
@@ -38,7 +38,7 @@ interface DataItem {
   status: string;
 }
 
-const columns: TableColumnsType = [
+const columns = [
   {
     title: "标题",
     dataIndex: "title",
@@ -64,7 +64,7 @@ const columns: TableColumnsType = [
     key: "action",
     width: 200,
   },
-];
+] as TableProps['columns'];
 
 const loading = ref(false);
 const dataSource = ref<DataItem[]>([]);

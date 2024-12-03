@@ -70,7 +70,7 @@ const formState = reactive<LoginParams>({
 const handleFinish = async (values: LoginParams) => {
   try {
     loading.value = true;
-    const res = await login(values);
+    const res: any = await login(values);
     await userStore.setLoginState(res);
     message.success("登录成功");
     router.push("/");

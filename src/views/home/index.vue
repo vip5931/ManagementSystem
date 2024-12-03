@@ -86,7 +86,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick } from "vue";
-import { Statistic } from "ant-design-vue";
+import { Statistic } from "ant-design-vue/es";
 import {
   ThunderboltOutlined,
   RiseOutlined,
@@ -96,7 +96,7 @@ import {
 import * as echarts from "echarts";
 import type { EChartsOption } from "echarts";
 import { getRankList } from "@/api/rank";
-import { message } from "ant-design-vue";
+import { message } from "ant-design-vue/es";
 
 interface RankItem {
   id: number;
@@ -159,9 +159,11 @@ const professionColors = {
   妙音: "#2f54eb", // 靛蓝色
 };
 
+type ProfessionType = keyof typeof professionColors;
+
 // 获取职业颜色
 const getProfessionColor = (profession: string) => {
-  return professionColors[profession] || "#8c8c8c";
+  return professionColors[profession as ProfessionType] || "#8c8c8c";
 };
 
 // 添加缺失的 ref 定义
@@ -469,15 +471,13 @@ const initTrendChart = () => {
 const fetchRankData = async () => {
   try {
     loading.value = true;
-    const result = await getRankList();
-
-    // 处理数据
-    const data = result.data;
+    const response = await getRankList();
+    const data = response.data || [] as RankItem[];
 
     // 计算统计数据
-    const totalPower = data.reduce((sum, item) => sum + item.combatPower, 0);
+    const totalPower = data.reduce((sum: number, item: RankItem) => sum + item.combatPower, 0);
     const avgPower = Math.floor(totalPower / (data.length || 1));
-    const maxPower = Math.max(...data.map((item) => item.combatPower));
+    const maxPower = Math.max(...data.map((item: RankItem) => item.combatPower));
 
     // 更新统计数据
     statistics.value = {
@@ -492,22 +492,12 @@ const fetchRankData = async () => {
 
     // 更新排行榜数据
     rankList.value = {
-      server: data.sort((a, b) => b.combatPower - a.combatPower).slice(0, 10),
-      profession: Object.values(
-        data.reduce((acc, curr) => {
-          if (
-            !acc[curr.profession] ||
-            acc[curr.profession].combatPower < curr.combatPower
-          ) {
-            acc[curr.profession] = curr;
-          }
-          return acc;
-        }, {} as Record<string, (typeof data)[0]>)
-      ),
+      server: data.sort((a: RankItem, b: RankItem) => b.combatPower - a.combatPower).slice(0, 10),
+      profession: data.sort((a: RankItem, b: RankItem) => b.combatPower - a.combatPower).slice(0, 10),
     };
 
     // 处理职业分布数据
-    const professionData = data.reduce((acc, curr) => {
+    const professionData = data.reduce((acc: Record<string, number>, curr: RankItem) => {
       acc[curr.profession] = (acc[curr.profession] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
@@ -536,7 +526,7 @@ const fetchRankData = async () => {
       "5000万以上": 0,
     };
 
-    data.forEach((item) => {
+    data.forEach((item: RankItem) => {
       const power = item.combatPower;
       if (power < 10000000) powerRanges["1000万以下"]++;
       else if (power < 20000000) powerRanges["1000-2000万"]++;
@@ -561,11 +551,11 @@ const fetchRankData = async () => {
     }
 
     // 处理服务器战力数据
-    const serverData = data.reduce((acc, curr) => {
+    const serverData = data.reduce((acc: Record<string, { total: number; count: number }>, curr: RankItem) => {
       if (!acc[curr.serverName]) {
         acc[curr.serverName] = {
           total: 0,
-          count: 0,
+          count: 0
         };
       }
       acc[curr.serverName].total += curr.combatPower;
